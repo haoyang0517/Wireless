@@ -27,7 +27,7 @@ const actions = [{
   position: 1
 }];
 
-let common = require('./CommonData');
+
 let SQLite = require('react-native-sqlite-storage');
 
 type Props = {};
@@ -109,7 +109,7 @@ export default class ViewScreen extends Component<Props> {
           />
           <InputWithLabel style={styles.output}
             label={'Language'}
-            value={movie ? common.getValue(common.languages, movie.language) : ''}
+            value={movie ? movie.language : ''}
             orientation={'vertical'}
             editable={false}
           />

@@ -3,7 +3,8 @@ import {
   StyleSheet,
   TextInput,
   Text,
-  ScrollView
+  ScrollView,
+  Picker
 } from 'react-native';
 import {
   InputWithLabel,
@@ -11,7 +12,7 @@ import {
   AppButton,
 } from './UI';
 
-let common = require('./CommonData');
+
 let SQLite = require('react-native-sqlite-storage');
 
 type Props = {};
@@ -25,7 +26,7 @@ export default class CreateScreen extends Component<Props> {
 
     this.state = {
       title: '',
-      language: '01',
+      language: 'English',
       release_date: '',
     };
 
@@ -56,22 +57,26 @@ export default class CreateScreen extends Component<Props> {
           onChangeText={(title) => {this.setState({title})}}
           orientation={'vertical'}
         />
-        <PickerWithLabel style={styles.picker}
-          label={'Language'}
-          items={common.languages}
-          mode={'dialog'}
-          value={this.state.language}
-          onValueChange={(itemValue, itemIndex) => {
+        <Text style={styles.label}>Language </Text>
+        <Picker
+          style={styles.picker}
+          mode={'dropdown'}
+          selectedValue={this.state.language}
+          onValueChange={(itemValue, itemIndex) => 
             this.setState({language: itemValue})
-          }}
-          orientation={'vertical'}
-          textStyle={{fontSize: 24}}
-        />
+          }>
+          <Picker.Item label="English" value="English" />
+          <Picker.Item label="Malay" value="Malay" />
+          <Picker.Item label="Mandarin" value="Mandarin" />
+          <Picker.Item label="Cantonese" value="Cantonese"/>
+          <Picker.Item label="Japanese" value="Japanese"/>
+          <Picker.Item label="Korean" value="Korean" />
+
+        </Picker>
         <InputWithLabel style={styles.input}
           label={'Release Date'}
           value={this.state.release_date}
           onChangeText={(release_date) => {this.setState({release_date})}}
-          //keyboardType={'email-address'}
           orientation={'vertical'}
         />
         
@@ -105,5 +110,12 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 10,
     marginBottom: 10,
+  },
+  label: {
+    flex: 1,
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginLeft: 3,
+    textAlignVertical: 'center',
   },
 });

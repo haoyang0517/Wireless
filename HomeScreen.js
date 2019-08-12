@@ -18,7 +18,7 @@ const actions = [{
   position: 1
 }];
 
-let common = require('./CommonData');
+
 let SQLite = require('react-native-sqlite-storage');
 
 type Props = {};
@@ -88,7 +88,7 @@ export default class HomeScreen extends Component {
               </View>
             </TouchableHighlight>
           }
-          keyExtractor={(item) => {item.id.toString()}}
+          keyExtractor={(item) => item.id.toString()}
         />
         <FloatingAction
           actions={actions}
